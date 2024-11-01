@@ -1,8 +1,8 @@
 import ccxt, { Exchange } from 'ccxt';
 import moment from 'moment';
 
-import { supabase } from '../db/db';
-import { redisClient } from '../redis/redis';
+import { supabase } from '$db/db';
+import { redisClient } from '$redis/redis';
 
 // 코인 가격 가져오기 함수
 // err = 에러 있을 시 카운팅용
@@ -49,6 +49,10 @@ async function comparePrices() {
 
 	// 현재 활성화 중인 마켓 목록 데이터 가져오기
 	const markets = await supabase.from('markets').select('*').eq('status', true);
+
+	console.log(coinDatas);
+
+	console.log(markets);
 
 	if (coinDatas.data && markets.data) {
 		const coins = coinDatas.data.map((coin) => coin.symbol);

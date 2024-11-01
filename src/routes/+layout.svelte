@@ -3,12 +3,22 @@
 	import Theme from '$components/Theme.svelte';
 	import * as Sidebar from '$ui/sidebar/index.js';
 	import AppSidebar from '$components/AppSidebar.svelte';
-	const { children } = $props();
+	import { onMount } from 'svelte';
+	import { marketState } from '$stores/market.svelte.js';
+	const { children, data } = $props();
+
+	onMount(() => {
+		const { marketDatas } = data;
+		marketDatas.data.forEach((item) => {
+			marketState.set(item.market, item.country || 'Intl');
+		});
+
+		console.log(marketState);
+	});
 </script>
 
-<Sidebar.Provider>
+<Sidebar.Provider class="gap-3">
 	<AppSidebar />
-	<Sidebar.Trigger />
 	<main>
 		{@render children?.()}
 	</main>

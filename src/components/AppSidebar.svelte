@@ -1,6 +1,13 @@
 <script lang="ts">
 	import * as Sidebar from '$ui/sidebar/index.ts';
+	import { onMount } from 'svelte';
 	import Theme from './Theme.svelte';
+
+	const useSidebar = Sidebar.useSidebar();
+
+	$effect(() => {
+		console.log(useSidebar.open);
+	});
 </script>
 
 <Sidebar.Root>
@@ -8,7 +15,7 @@
 		Header
 		<Theme />
 	</Sidebar.Header>
-	<Sidebar.Content class="shadow-lg">
+	<Sidebar.Content class=" shadow-lg">
 		<Sidebar.Group>
 			<Sidebar.GroupLabel>Application</Sidebar.GroupLabel>
 			<Sidebar.GroupContent>
@@ -20,6 +27,8 @@
 			</Sidebar.GroupContent>
 		</Sidebar.Group>
 		<Sidebar.Group />
+		<Sidebar.Trigger
+			class="absolute -right-3 top-0 h-full  w-3 rounded-none rounded-r-md bg-primary bg-opacity-50 p-0 "
+		/>
 	</Sidebar.Content>
-	<Sidebar.Footer />
 </Sidebar.Root>

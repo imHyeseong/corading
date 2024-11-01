@@ -1,11 +1,5 @@
 <script>
 	import { onMount } from 'svelte';
-
-	const { data } = $props();
-
-	onMount(() => {
-		console.log(data);
-	});
 </script>
 
 <h1>Welcome to SvelteKit</h1>

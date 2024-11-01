@@ -13,10 +13,13 @@ const config = {
 		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
 		adapter: adapter(),
 		alias: {
-			$db: 'db',
+			$db: 'src/db',
 			$redis: 'redis',
 			$components: 'src/components',
-			$ui: 'src/lib/shadcn/ui'
+			$ui: 'src/lib/shadcn/ui',
+			$types: 'src/types',
+			$redis: 'src/redis',
+			$stores: 'src/stores'
 		}
 	}
 };
