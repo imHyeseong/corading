@@ -12,41 +12,101 @@ export type Database = {
       coins: {
         Row: {
           id: number
-          status: boolean | null
+          status: boolean
           symbol: string
         }
         Insert: {
           id?: number
-          status?: boolean | null
+          status?: boolean
           symbol: string
         }
         Update: {
           id?: number
-          status?: boolean | null
+          status?: boolean
           symbol?: string
+        }
+        Relationships: []
+      }
+      kimp_bot: {
+        Row: {
+          coin: string | null
+          created_at: string
+          entry_tether: number | null
+          exit_tether: number | null
+          id: number
+          qty: number | null
+        }
+        Insert: {
+          coin?: string | null
+          created_at?: string
+          entry_tether?: number | null
+          exit_tether?: number | null
+          id?: number
+          qty?: number | null
+        }
+        Update: {
+          coin?: string | null
+          created_at?: string
+          entry_tether?: number | null
+          exit_tether?: number | null
+          id?: number
+          qty?: number | null
         }
         Relationships: []
       }
       markets: {
         Row: {
-          country: string | null
+          country: string
           id: number
           market: string
-          status: boolean | null
+          status: boolean
         }
         Insert: {
-          country?: string | null
+          country: string
           id?: number
           market: string
-          status?: boolean | null
+          status?: boolean
         }
         Update: {
-          country?: string | null
+          country?: string
           id?: number
           market?: string
-          status?: boolean | null
+          status?: boolean
         }
         Relationships: []
+      }
+      primary_pair: {
+        Row: {
+          id: number
+          intl: number
+          kor: number
+        }
+        Insert: {
+          id?: number
+          intl: number
+          kor: number
+        }
+        Update: {
+          id?: number
+          intl?: number
+          kor?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "primary_pair_intl_fkey"
+            columns: ["intl"]
+            isOneToOne: false
+            referencedRelation: "markets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "primary_pair_kor_fkey"
+            columns: ["kor"]
+            isOneToOne: true
+            referencedRelation: "markets"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

@@ -54,4 +54,8 @@
 	body {
 		@apply bg-background text-foreground;
 	}
+
+	th * {
+		@apply text-center;
+	}
 }
