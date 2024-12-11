@@ -27,33 +27,6 @@ export type Database = {
         }
         Relationships: []
       }
-      kimp_bot: {
-        Row: {
-          coin: string | null
-          created_at: string
-          entry_tether: number | null
-          exit_tether: number | null
-          id: number
-          qty: number | null
-        }
-        Insert: {
-          coin?: string | null
-          created_at?: string
-          entry_tether?: number | null
-          exit_tether?: number | null
-          id?: number
-          qty?: number | null
-        }
-        Update: {
-          coin?: string | null
-          created_at?: string
-          entry_tether?: number | null
-          exit_tether?: number | null
-          id?: number
-          qty?: number | null
-        }
-        Relationships: []
-      }
       markets: {
         Row: {
           country: string
@@ -75,38 +48,136 @@ export type Database = {
         }
         Relationships: []
       }
-      primary_pair: {
+      tx_gimp: {
         Row: {
+          coin: string
+          created_at: string
+          entry_tether: number
+          exit_tether: number | null
           id: number
-          intl: number
-          kor: number
+          intl_market: string
+          kor_market: string
+          qty: number
+          user_id: number
         }
         Insert: {
+          coin: string
+          created_at?: string
+          entry_tether: number
+          exit_tether?: number | null
           id?: number
-          intl: number
-          kor: number
+          intl_market: string
+          kor_market: string
+          qty: number
+          user_id: number
         }
         Update: {
+          coin?: string
+          created_at?: string
+          entry_tether?: number
+          exit_tether?: number | null
           id?: number
-          intl?: number
-          kor?: number
+          intl_market?: string
+          kor_market?: string
+          qty?: number
+          user_id?: number
         }
         Relationships: [
           {
-            foreignKeyName: "primary_pair_intl_fkey"
-            columns: ["intl"]
+            foreignKeyName: "tx_gimp_coin_fkey"
+            columns: ["coin"]
             isOneToOne: false
-            referencedRelation: "markets"
-            referencedColumns: ["id"]
+            referencedRelation: "coins"
+            referencedColumns: ["symbol"]
           },
           {
-            foreignKeyName: "primary_pair_kor_fkey"
-            columns: ["kor"]
-            isOneToOne: true
+            foreignKeyName: "tx_gimp_intl_market_fkey"
+            columns: ["intl_market"]
+            isOneToOne: false
             referencedRelation: "markets"
+            referencedColumns: ["market"]
+          },
+          {
+            foreignKeyName: "tx_gimp_kor_market_fkey"
+            columns: ["kor_market"]
+            isOneToOne: false
+            referencedRelation: "markets"
+            referencedColumns: ["market"]
+          },
+          {
+            foreignKeyName: "tx_gimp_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_api: {
+        Row: {
+          access: string
+          created_at: string
+          expire_at: string | null
+          id: number
+          market: string
+          secret: string
+          uid: string | null
+          user_id: number
+        }
+        Insert: {
+          access: string
+          created_at?: string
+          expire_at?: string | null
+          id?: number
+          market: string
+          secret: string
+          uid?: string | null
+          user_id: number
+        }
+        Update: {
+          access?: string
+          created_at?: string
+          expire_at?: string | null
+          id?: number
+          market?: string
+          secret?: string
+          uid?: string | null
+          user_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_api_market_fkey"
+            columns: ["market"]
+            isOneToOne: false
+            referencedRelation: "markets"
+            referencedColumns: ["market"]
+          },
+          {
+            foreignKeyName: "user_api_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      users: {
+        Row: {
+          created_at: string
+          id: number
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          name?: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          name?: string
+        }
+        Relationships: []
       }
     }
     Views: {

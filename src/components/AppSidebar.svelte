@@ -1,12 +1,9 @@
 <script lang="ts">
 	import * as Sidebar from '$ui/sidebar/index.ts';
+	import { onMount } from 'svelte';
 	import Theme from './Theme.svelte';
 
 	const useSidebar = Sidebar.useSidebar();
-
-	$effect(() => {
-		console.log(useSidebar.open);
-	});
 </script>
 
 <Sidebar.Root>

@@ -19,7 +19,8 @@ const config = {
 			$ui: 'src/lib/shadcn/ui',
 			$types: 'src/types',
 			$redis: 'src/redis',
-			$stores: 'src/stores'
+			$stores: 'src/stores',
+			$lib: 'src/lib'
 		}
 	}
 };

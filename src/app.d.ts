@@ -3,10 +3,21 @@
 declare global {
 	namespace App {
 		// interface Error {}
-		// interface Locals {}
+		interface Locals {
+			user: number;
+		}
 		// interface PageData {}
-		// interface PageState {}
 		// interface Platform {}
+		interface Actions {
+			generateGimp: (data: {
+				coin: string;
+				kor_market: string;
+				intl_market: string;
+				qty: number;
+				entry_tether: number;
+				exit_tether: number;
+			}) => void;
+		}
 	}
 }
 

@@ -1,12 +1,13 @@
 <script lang="ts">
 	import * as Select from '$ui/select/index.ts';
+	import type { SelectSingleRootProps } from 'bits-ui';
 
 	type Props = {
 		markets: any;
-		country: string;
-	};
+		country?: string;
+	} & Partial<SelectSingleRootProps>;
 
-	let { markets, country = $bindable() }: Props = $props();
+	let { markets, country = $bindable(), ...restProps }: Props = $props();
 
 	const imgErrorHandler = (e: Event) => {
 		const target = e.target as HTMLImageElement;
@@ -16,19 +17,12 @@
 	};
 </script>
 
-<Select.Root type="single" required bind:value={country}>
+<Select.Root {...restProps} type="single" required bind:value={country}>
 	<Select.Trigger>{country}</Select.Trigger>
 	<Select.Content>
 		{#each markets as market}
-			<Select.Item value={market.market} class="flex items-center justify-between gap-2">
-				<p>{market.market}</p>
-				<img
-					src={`/logo/${market.market}.webp`}
-					onerror={imgErrorHandler}
-					loading="lazy"
-					alt={market.market}
-					class="w-10"
-				/>
+			<Select.Item value={market.market}>
+				<p class="text-base font-bold">{market.market}</p>
 			</Select.Item>
 		{/each}
 	</Select.Content>

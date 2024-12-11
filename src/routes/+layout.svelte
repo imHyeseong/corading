@@ -1,9 +1,15 @@
 <script module>
 	import { io } from 'socket.io-client';
-	const socket = io('http://localhost:8888/client', { transports: ['websocket'] });
+	import { PUBLIC_BASE_URL } from '$env/static/public';
 
-	socket.on('connect', () => {
-		console.log('connected to socket');
+	const socket: SocketClient = io(`${PUBLIC_BASE_URL}:8888/client`, {
+		transports: ['websocket']
+	});
+	socket.on('connected', (address) => {
+		console.log('connected', address);
+	});
+	socket.on('disconnected', () => {
+		console.log('disconnected');
 	});
 </script>
 
@@ -11,22 +17,17 @@
 	import '../app.css';
 	import * as Sidebar from '$ui/sidebar/index.js';
 	import AppSidebar from '$components/AppSidebar.svelte';
-	import { onMount, setContext } from 'svelte';
-	import { coins, markets } from '$stores/globals.js';
+	import { onDestroy, onMount, setContext } from 'svelte';
+	import { invalidate } from '$app/navigation';
 	const { children, data } = $props();
 
-	setContext('socket', socket);
 	onMount(() => {
-		if (data.error) {
-			console.error(data.error);
-		} else {
-			coins.set(data.coins ?? []);
-			markets.set(data.markets ?? []);
-		}
-
-		return () => {
-			socket.disconnect();
-		};
+		console.log(data);
+		invalidate('init:coins');
+	});
+	setContext('socket', socket);
+	onDestroy(() => {
+		socket.disconnect();
 	});
 </script>
 

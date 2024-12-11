@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@socket.io/redis-adapter':
+    specifier: ^8.3.0
+    version: 8.3.0(socket.io-adapter@2.5.5)
   '@supabase/supabase-js':
     specifier: ^2.46.1
     version: 2.46.1
@@ -18,7 +21,7 @@ dependencies:
     specifier: ^2.13.13
     version: 2.13.16(typescript@5.6.3)(webpack-cli@4.10.0)
   bybit-api:
-    specifier: ^3.10.24
+    specifier: ^3.10.27
     version: 3.10.27(typescript@5.6.3)
   ccxt:
     specifier: ^4.4.25
@@ -26,9 +29,6 @@ dependencies:
   dotenv:
     specifier: ^16.4.5
     version: 16.4.5
-  eiows:
-    specifier: ^7.1.2
-    version: 7.1.2
   moment:
     specifier: ^2.30.1
     version: 2.30.1
@@ -779,6 +779,20 @@ packages:
 
   /@socket.io/component-emitter@3.1.2:
     resolution: {integrity: sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==}
+    dev: false
+
+  /@socket.io/redis-adapter@8.3.0(socket.io-adapter@2.5.5):
+    resolution: {integrity: sha512-ly0cra+48hDmChxmIpnESKrc94LjRL80TEmZVscuQ/WWkRP81nNj8W8cCGMqbI4L6NCuAaPRSzZF1a9GlAxxnA==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      socket.io-adapter: ^2.5.4
+    dependencies:
+      debug: 4.3.7
+      notepack.io: 3.0.1
+      socket.io-adapter: 2.5.5
+      uid2: 1.0.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /@supabase/auth-js@2.65.1:
@@ -1901,13 +1915,6 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /eiows@7.1.2:
-    resolution: {integrity: sha512-2PmaCMo0iVmQTgkLox9fGoUvYPh7DtAUwTAiQw5IGsf0Ujh3pciwPbX04fbn9C/derdXJK+3QmdiEUp9EJuabQ==}
-    engines: {node: '>=16 <23.0'}
-    os: ['!win32', linux, freebsd, darwin]
-    requiresBuild: true
-    dev: false
-
   /electron-to-chromium@1.5.62:
     resolution: {integrity: sha512-t8c+zLmJHa9dJy96yBZRXGQYoiCEnHYgFwn1asvSPZSUdVxnB62A4RASd7k41ytG3ErFBA0TpHlKg9D9SQBmLg==}
 
@@ -2904,6 +2911,10 @@ packages:
     resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /notepack.io@3.0.1:
+    resolution: {integrity: sha512-TKC/8zH5pXIAMVQio2TvVDTtPRX+DJPHDqjRbxogtFiByHyzKmy96RA0JtCQJ+WouyyL4A10xomQzgbUT+1jCg==}
+    dev: false
 
   /npm-normalize-package-bin@4.0.0:
     resolution: {integrity: sha512-TZKxPvItzai9kN9H/TkmCtx/ZN/hvr3vUycjlfmH0ootY9yFBzNOpiXAdIn1Iteqsvk4lQn6B5PTrt+n6h8k/w==}
@@ -4153,6 +4164,11 @@ packages:
     resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
     engines: {node: '>=14.17'}
     hasBin: true
+
+  /uid2@1.0.0:
+    resolution: {integrity: sha512-+I6aJUv63YAcY9n4mQreLUt0d4lvwkkopDNmpomkAUz0fAkEMV9pRWxN0EjhW1YfRhcuyHg2v3mwddCDW1+LFQ==}
+    engines: {node: '>= 4.0.0'}
+    dev: false
 
   /undici-types@6.19.8:
     resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}

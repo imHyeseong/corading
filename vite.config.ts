@@ -1,11 +1,13 @@
 import { defineConfig } from 'vitest/config';
-import mkcert from 'vite-plugin-mkcert';
 import { sveltekit } from '@sveltejs/kit/vite';
 
 export default defineConfig({
-	plugins: [sveltekit(), mkcert()],
+	plugins: [sveltekit()],
 	server: {
-		host: '0.0.0.0',
+		cors: {
+			origin: '*'
+		},
+		host: process.env.PUBLIC_BASE_IP,
 		port: 8000,
 		proxy: {}
 	},
